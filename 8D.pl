@@ -21,8 +21,11 @@ BANNER
 print CLEAR BRIGHT_BLUE;
 print << 'BANNER';
 Copyright 2012 Jake Bott
-Creative Commons
-CC-BY-SA
+Licensed under the MIT License.
+You should have recieved a copy of this
+with the program.  If not, head on over to
+http://opensource.org/licenses/MIT and
+get a copy.
 BANNER
 
 print CLEAR;
@@ -145,9 +148,9 @@ while (chteam) {
 			my $q;
 			$loc[$t]--;
 			$q = findbots(\@loc);
-			$bot->{IN} .= $c . '-=' . (($q) ? "BOT TEAM" . $q->{teamid} . " ID" . $q->{id} . " HEALTH" . $q->{health} . "\n" : worldgs(\@loc));
+			$bot->{IN} .= $c . '-=' . (($q) ? "-BOT TEAM" . $q->{teamid} . " ID" . $q->{id} . " HEALTH" . $q->{health} . "\n" : worldgs(\@loc)) unless $loc[$t] < 0;
 			$loc[$t] += 2;
-			$bot->{IN} .= $c . '+=' . (($q) ? "BOT TEAM" . $q->{teamid} . " ID" . $q->{id} . "\n" : worldgs(\@loc));
+			$bot->{IN} .= $c . '+=' . (($q) ? "-BOT TEAM" . $q->{teamid} . " ID" . $q->{id} . " HEALTH" . $q->{health} . "\n" : worldgs(\@loc)) unless $loc[$t] >= $worldsize;
 			$loc[$t]--;
 			$c++;
 		}
@@ -207,7 +210,7 @@ while (chteam) {
 				next;
 			}
 			my $q = findbots(\@arr);
-			$bot->{IN} .= $d2 . '-=' . (($q) ? "BOT TEAM" . $q->{teamid} . " ID" . $q->{id} . " HEALTH" . $q->{health} . "\n" : worldgs(\@arr));
+			$bot->{IN} .= $d2 . $d3 . '=' . (($q) ? "BOT TEAM" . $q->{teamid} . " ID" . $q->{id} . " HEALTH" . $q->{health} . "\n" : worldgs(\@arr));
 		} elsif ($command =~ /PLACE/) {
 			$command =~ s/PLACE//;
 			@arr = @$bot->{location};
