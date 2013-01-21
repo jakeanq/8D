@@ -1,0 +1,84 @@
+ .d8888b.  8888888b. 
+d88P  Y88b 888  "Y88b
+Y88b. d88P 888    888
+ "Y88888"  888    888
+.d8P""Y8b. 888    888
+888    888 888    888
+Y88b..d88P 888  .d88P
+ "Y8888P"  8888888P"
+
+8D is a 8 dimensional programming challenge.
+
+Bots communicate via STDIN/STDOUT using a simple set of commands:
+
+At the initialisation stage, each bot will recieve a message specifying their ID and Team ID:
+
+TEAM:0
+ID:0
+
+At the start of each turn, they will recieve a info update:
+
+ENVIRONS
+I+=<contents of the cell in the I+ direction>
+I-=<contents of the cell in the I- direction>
+J+=...
+...
+KLMNO
+P-=<contents of the cell in the P- direction>
+STATS
+HEALTH=100
+
+Any direction may be skipped if it falls without the world area.
+The contents are in the format:
+
+A
+
+for an air cell
+
+B<string>
+
+for a filled cell (the string can be anything that will fit into a perl SV, possibly good for use as 'flags' when placed by your bots)
+It is B0 by default.
+
+If there is a bot present, the format will be:
+
+-BOT TEAM 0 HEALTH 100
+
+Bot Commands.
+
+Each bot can execute one command per 'turn'.  The sequence of bots is randomized each turn.
+
+Possible commands:
+
+MOVE <direction> - Moves in the direction specified
+
+ATTACK <direction> - Attacks in the direction specified for 20-60 damage or destruction of the filled cell, if any
+
+LOOK <direction> - Looks at the contents of the cell two cells over in the direction specified, returns the contents as above
+
+PLACE<string> <direction> - Places a filled cell with label <string> in the direction specified.
+
+Any of the above will return ERROR if the requested command could not be carried out for some reason.
+
+If/when a bot eventually is the last standing, it will recieve WIN! while if at any time its health drops below 0, it will have died and will be terminated after receiving DIED.
+
+Any bot that takes too long to provide input will be skipped.
+
+Initial health is 100.
+
+
+
+TODO:
+
+Add bonuses
+Add GUI and better status display?
+Add logging?
+Add some form of visualiser?
+Find and fix bugs
+And other things when they appear.
+
+
+
+BUGS:
+
+None at the moment!
